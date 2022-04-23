@@ -7,9 +7,8 @@ I'm trying to approach the most recent and elegant ways to project a web applica
 
 - Kanban
 - Agile
-- Clean Architecture
+- Vertical Slices
 - Clean Code
-- Single Responsibility Principle
 
 ## Technologies
 A list of technologies that you will find in this project.
