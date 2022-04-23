@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using WebApi.Configuration.IoC;
+using WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediator();
 
 var app = builder.Build();
 
@@ -23,5 +26,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlerMiddlerware>();
 
 app.Run();
