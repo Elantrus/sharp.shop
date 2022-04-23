@@ -1,13 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
 
-namespace Sharp.Shop.UnitTests.Utilities;
+namespace Tests.Utilities;
 
 public class TestServerFixture 
 {

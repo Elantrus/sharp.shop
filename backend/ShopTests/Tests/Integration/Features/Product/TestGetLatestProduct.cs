@@ -1,12 +1,11 @@
-﻿using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Sharp.Shop.UnitTests.Utilities;
 using Shouldly;
+using Tests.Utilities;
 using WebApi.Features.Product.Application;
 using Xunit;
 
-namespace Sharp.Shop.UnitTests.Integration.Features.Product;
+namespace Tests.Integration.Features.Product;
 
 public class TestGetLatestProduct: IClassFixture<TestServerFixture>
 {
