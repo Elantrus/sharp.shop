@@ -7,7 +7,7 @@ I'm trying to approach the most recent and elegant ways to project a web applica
 
 - Kanban
 - Agile
-- Vertical Slices
+- Vertical Slices Architecture
 - Clean Code
 
 ## Technologies
