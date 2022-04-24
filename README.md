@@ -1,6 +1,6 @@
 # Sharp Shop - A single product sale website
 
-This project is a website which is intended to sell a single product, but not limited to a landing page: Users will be able to create an account, login, check their orders, check tracking information and issue payments.
+This project is a website which is intended to sell a single product, but not limited to. Users will be able to create an account, login, check their orders, check tracking information and issue payments.
 
 ## Approach
 I'm trying to approach the most recent and elegant ways to project a web application, with that in mind, the following terms were very common during this work:
