@@ -2,21 +2,22 @@
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Exceptions;
 
 namespace WebApi.Features.Product.Application;
 
-public static class GetLatestProduct
+public static class GetProductMetrics
 {
     public class Command : IRequest<Result>
     {
-        
+        public long Id { get; set; }
     }
 
     public class Result
     {
-        public string Id { get; set; }
-        public string Description { get; set; }
-        public double SalePrice { get; set; }
+        public long Id { get; set; }
+        public long TotalSales { get; set; }
+        public double Score { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, Result>
@@ -28,11 +29,10 @@ public static class GetLatestProduct
         }
         public async Task<Result> Handle(Command queryRequest, CancellationToken cancellationToken)
         {
-            var latestProduct = await _dbContext.Products
-                .OrderByDescending(product => product.Id)
-                .FirstAsync(cancellationToken);
+            var productDb = await _dbContext.Products
+                .SingleOrDefaultAsync(product => product.Id == queryRequest.Id) ?? throw new ProductNotFoundException(queryRequest.Id);
 
-            var result = latestProduct.Adapt<Result>();
+            var result = productDb.Metrics.Adapt<Result>();
 
             return result;
         }
