@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Core.Domain.Entities;
 
 public class Product
@@ -6,5 +8,5 @@ public class Product
     public string Description { get; set; }
     public double SalePrice { get; set; }
     public double ProductCost { get; set; }
-    public virtual Metrics Metrics { get; set; }
+    public virtual Metric Metric { get; set; }
 }

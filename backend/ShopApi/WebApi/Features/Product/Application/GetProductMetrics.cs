@@ -30,9 +30,10 @@ public static class GetProductMetrics
         public async Task<Result> Handle(Command queryRequest, CancellationToken cancellationToken)
         {
             var productDb = await _dbContext.Products
+                .Include(product => product.Metric)
                 .SingleOrDefaultAsync(product => product.Id == queryRequest.Id) ?? throw new ProductNotFoundException(queryRequest.Id);
 
-            var result = productDb.Metrics.Adapt<Result>();
+            var result = productDb.Metric.Adapt<Result>();
 
             return result;
         }

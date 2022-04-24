@@ -21,7 +21,7 @@ public class TestGetProductMetrics
     {
         var command = new GetProductMetrics.Command();
 
-        var response = await _fixture.Client.GetAsync("/api/product/metrics");
+        var response = await _fixture.Client.GetAsync("/api/product/1/metrics");
 
         response.EnsureSuccessStatusCode();
 

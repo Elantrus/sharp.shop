@@ -22,4 +22,15 @@ public class ProductController : ControllerBase
 
         return Ok(result);
     }
+    
+    [HttpGet("{productId}/metrics")]
+    public async Task<ActionResult<GetProductMetrics.Result>> GetMetricsAsync(long productId)
+    {
+        var result = await _mediator.Send(new GetProductMetrics.Command()
+        {
+            Id = productId
+        });
+
+        return Ok(result);
+    }
 }

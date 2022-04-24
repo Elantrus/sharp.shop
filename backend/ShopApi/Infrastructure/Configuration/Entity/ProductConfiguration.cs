@@ -23,7 +23,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasPrecision(2)
             .IsRequired();
 
-        builder.HasOne(product => product.Metrics)
-            .WithOne(metric => metric.Product);
+        builder.HasOne(product => product.Metric)
+            .WithOne(metric => metric.Product)
+            .HasForeignKey<Metric>(fr => fr.ProductForeignId);
     }
 }

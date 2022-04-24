@@ -1,4 +1,5 @@
 using Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
@@ -10,6 +11,7 @@ public static class DatabaseSeed
     {
         var latestProduct = dbContext
             .Products
+            .Include(product => product.Metric)
             .OrderByDescending(product => product.Id)
             .FirstOrDefault();
         
@@ -19,7 +21,7 @@ public static class DatabaseSeed
             {
                 Description = "Action Figure - Naruto",
                 SalePrice = 12.99d,
-                Metrics = new Metrics
+                Metric = new Metric
                 {
                     Score = 5,
                     GrossValue = 0,
@@ -36,9 +38,15 @@ public static class DatabaseSeed
             if (!latestProduct.Description.Equals("Action Figure - Naruto"))
                 latestProduct.Description = "Action Figure - Naruto";
 
-            if (latestProduct.Metrics == null)
+            if (latestProduct.Metric == null)
             {
-                
+                latestProduct.Metric = new Metric
+                {
+                    Score = 5,
+                    GrossValue = 0,
+                    NetValue = 0,
+                    TotalSales = 0
+                };
             }
         }
         
