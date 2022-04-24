@@ -1,5 +1,7 @@
 ﻿using System.Net.Http;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Tests.Utilities;
 
@@ -13,4 +15,5 @@ public class TestServerFixture
 
         Client = webFactory.CreateDefaultClient();
     }
+    
 }

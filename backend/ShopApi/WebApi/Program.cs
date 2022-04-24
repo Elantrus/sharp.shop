@@ -1,3 +1,4 @@
+using Infrastructure.Configuration.IoC;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using WebApi.Configuration.IoC;
 using WebApi.Middlewares;
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediator();
+builder.Services.AddDatabase();
 
 var app = builder.Build();
 
