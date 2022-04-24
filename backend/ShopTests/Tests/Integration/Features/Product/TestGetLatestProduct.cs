@@ -30,8 +30,8 @@ public class TestGetLatestProduct: IClassFixture<TestServerFixture>
         var result = JsonConvert.DeserializeObject<GetLatestProduct.Result>(stringResponse);
 
         result.ShouldNotBeNull();
-        result.ProductDescription.ShouldNotBeNull();
-        result.ProductId.ShouldNotBeNull();
-        result.ProductPrice.ShouldBeGreaterThan(0);
+        result.Description.ShouldNotBeNull();
+        result.Id.ShouldNotBeNull();
+        result.Price.ShouldBeGreaterThan(0);
     }
 }

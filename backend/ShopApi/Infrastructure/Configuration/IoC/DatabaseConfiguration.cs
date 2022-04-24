@@ -11,7 +11,7 @@ public static class DatabaseConfiguration
         var cn = Environment.GetEnvironmentVariable("SHOPAPI_DB");
 
         if (string.IsNullOrWhiteSpace(cn))
-            cn = ".\\SQLEXPRESS; Database=sharp.shop;User Id=sharp;Password=sharp;";
+            cn = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=sharp.shop;User=sharp;Password=sharp";
 
         services.AddDbContext<ShopDbContext>(options =>
         {

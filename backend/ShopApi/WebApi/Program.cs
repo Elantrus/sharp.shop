@@ -1,4 +1,5 @@
 using Infrastructure.Configuration.IoC;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using WebApi.Configuration.IoC;
 using WebApi.Middlewares;
@@ -28,6 +29,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MigrateAndSeed();
 
 app.UseMiddleware<ExceptionHandlerMiddlerware>();
 
