@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Features.Product.Application;
+using WebApi.Features.Products.Application;
 
-namespace WebApi.Features.Product;
+namespace WebApi.Features.Products;
 
 [ApiController]
 [Route("api/[controller]")]

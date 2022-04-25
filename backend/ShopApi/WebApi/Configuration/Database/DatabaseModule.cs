@@ -1,8 +1,7 @@
-using Core.Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Extensions;
+namespace WebApi.Configuration.Database;
 
 public static class DatabaseModule
 {
@@ -14,7 +13,9 @@ public static class DatabaseModule
 
             if (dbContext == null) throw new NullReferenceException();
             
-            dbContext.Database.Migrate();
+            if(!app.Environment.IsDevelopment())
+                dbContext.Database.Migrate();
+            
             dbContext.SeedProduct();
         }
     }

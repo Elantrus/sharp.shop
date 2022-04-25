@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Exceptions;
 
-namespace WebApi.Features.Product.Application;
+namespace WebApi.Features.Products.Application;
 
 public static class GetProductMetrics
 {

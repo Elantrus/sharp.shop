@@ -3,7 +3,7 @@ using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApi.Features.Product.Application;
+namespace WebApi.Features.Products.Application;
 
 public static class GetLatestProduct
 {

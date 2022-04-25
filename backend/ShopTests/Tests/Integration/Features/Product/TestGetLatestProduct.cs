@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Shouldly;
 using Tests.Utilities;
-using WebApi.Features.Product.Application;
+using WebApi.Features.Products.Application;
 using Xunit;
 
 namespace Tests.Integration.Features.Product;
@@ -17,10 +17,8 @@ public class TestGetLatestProduct: IClassFixture<TestServerFixture>
     }
 
     [Fact]
-    public async Task Should_Have_Product()
+    public async Task Product_Should_Exist()
     {
-        var command = new GetLatestProduct.Command();
-
         var response = await _fixture.Client.GetAsync("/api/product");
 
         response.EnsureSuccessStatusCode();
@@ -36,8 +34,6 @@ public class TestGetLatestProduct: IClassFixture<TestServerFixture>
     [Fact]
     public async Task Product_Should_Have_Props()
     {
-        var command = new GetLatestProduct.Command();
-
         var response = await _fixture.Client.GetAsync("/api/product");
 
         response.EnsureSuccessStatusCode();
