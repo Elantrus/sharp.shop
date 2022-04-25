@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Features.Product.Application;
+using WebApi.Features.Products.Application;
 
-namespace WebApi.Features.Product;
+namespace WebApi.Features.Products;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -19,6 +19,17 @@ public class ProductController : ControllerBase
     public async Task<ActionResult<GetLatestProduct.Result>> GetAsync()
     {
         var result = await _mediator.Send(new GetLatestProduct.Command());
+
+        return Ok(result);
+    }
+    
+    [HttpGet("{productId}/metrics")]
+    public async Task<ActionResult<GetProductMetrics.Result>> GetMetricsAsync(long productId)
+    {
+        var result = await _mediator.Send(new GetProductMetrics.Command()
+        {
+            Id = productId
+        });
 
         return Ok(result);
     }

@@ -3,7 +3,7 @@ using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApi.Features.Product.Application;
+namespace WebApi.Features.Products.Application;
 
 public static class GetLatestProduct
 {
@@ -14,9 +14,9 @@ public static class GetLatestProduct
 
     public class Result
     {
-        public string Id { get; protected set; }
-        public string Description { get; protected set; }
-        public double Price { get; protected set; }
+        public string Id { get; set; }
+        public string Description { get; set; }
+        public double SalePrice { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, Result>
@@ -32,7 +32,9 @@ public static class GetLatestProduct
                 .OrderByDescending(product => product.Id)
                 .FirstAsync(cancellationToken);
 
-            return latestProduct.Adapt<Result>();
+            var result = latestProduct.Adapt<Result>();
+
+            return result;
         }
     }
 }
