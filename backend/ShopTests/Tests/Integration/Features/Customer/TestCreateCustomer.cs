@@ -1,13 +1,13 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Shouldly;
 using Tests.Utilities;
 using WebApi.Features.Customers.Application;
+using WebApi.Features.Security.Application;
 using Xunit;
 
-namespace Tests.Integration.Features.Product;
+namespace Tests.Integration.Features.Customer;
 
 public class TestCreateCustomer
 {
@@ -49,4 +49,31 @@ public class TestCreateCustomer
 
         response.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
     }
+    
+    [Fact]
+    public async Task Customer_Login_Should_Return_Jwt()
+    {
+        var command = new CreateCustomer.Command
+        {
+            Email = "test@sharp.io",
+            Name = "Lazaro",
+            SurName = "Junior Silva",
+            Password = "v3r%StroNgp4ssw0rd"
+        };
+
+        var response = await _fixture.Client.PostAsJsonAsync("/api/customer", command);
+
+        response.EnsureSuccessStatusCode();
+        
+        var loginCommand = new CustomerAuthentication.Command
+        {
+            Email = "test@sharp.io",
+            Password = "v3r%StroNgp4ssw0rd"
+        };
+
+        var loginResponse = await _fixture.Client.PostAsJsonAsync("/api/authentication", loginCommand);
+
+        loginResponse.EnsureSuccessStatusCode();
+    }
+    
 }

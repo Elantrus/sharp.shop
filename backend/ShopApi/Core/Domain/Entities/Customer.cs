@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using Core.Exceptions;
+using Core.Extensions;
 
 namespace Core.Domain.Entities;
 
@@ -9,7 +10,7 @@ public class Customer
     public string Name { get; private set; }
     public string SurName { get; private set; }
     public string Email { get; private set; }
-    public string Password { get; private set; }
+    public string Password { get; set; }
     
     public string Role { get; set; }
     
@@ -17,11 +18,16 @@ public class Customer
     private static int CLIENT_MIN_SURNAME_SIZE = 3;
     private static int CLIENT_MIN_EMAIL_SIZE = 10;
 
+    public Customer()
+    {
+    }
+
     public Customer(string name, string surName, string email, string password)
     {
         SetFullName(name, surName);
         SetEmail(email);
         SetPassword(password);
+        Role = nameof(Customer).ToLower();
     }
     
     private void SetFullName(string name, string surName)
@@ -47,22 +53,8 @@ public class Customer
         if (!Regex.IsMatch(password, "(?=.*[a-z])")) throw new PasswordIsTooWeakException("lowercase character.");
         if (!Regex.IsMatch(password, "(?=.*[A-Z])")) throw new PasswordIsTooWeakException("uppercase character.");
         if (!Regex.IsMatch(password, "(?=.*[@#$%])")) throw new PasswordIsTooWeakException("special symbol.");
-        
-        var bytes = System.Text.Encoding.UTF8.GetBytes(password);
-        
-        using (var hash = System.Security.Cryptography.SHA512.Create())
-        {
-            var hashedInputBytes = hash.ComputeHash(bytes);
 
-            var hashedInputStringBuilder = new System.Text.StringBuilder(128);
-            foreach (var b in hashedInputBytes)
-                hashedInputStringBuilder.Append(b.ToString("X2"));
-            Password = hashedInputStringBuilder.ToString();
-        }
+        Password = password.Hash();
     }
 
-    public void SetRoles(string customerRoles)
-    {
-        Role = customerRoles;
-    }
 }

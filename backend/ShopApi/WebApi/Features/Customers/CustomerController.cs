@@ -1,3 +1,4 @@
+using Core.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,11 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "customer")]
     public async Task<ActionResult> Get()
     {
-        throw new NotImplementedException();
+        var result = await _mediator.Send(new GetCustomer.Command());
+
+        return Ok(result);
     }
 }
