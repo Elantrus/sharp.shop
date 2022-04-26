@@ -2,6 +2,7 @@ using Core.Domain.Entities;
 using Infrastructure.Data;
 using MediatR;
 using WebApi.Exceptions;
+using WebApi.Security;
 
 namespace WebApi.Features.Customers.Application;
 
@@ -31,6 +32,8 @@ public class CreateCustomer
             if (emailExistsInCustomers) throw new EmailAlreadyExistsException();
 
             var createdCustomer = new Customer(request.Name, request.SurName, request.Email, request.Password);
+
+            createdCustomer.SetRoles(RoleProvider.CustomerRoles());
             
             _dbContext.Add(createdCustomer);
 

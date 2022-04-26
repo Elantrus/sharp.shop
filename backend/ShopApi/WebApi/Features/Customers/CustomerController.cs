@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Features.Customers.Application;
 
@@ -15,9 +16,16 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody] CreateCustomer.Command createCustomerCommand)
     {
         await _mediator.Send(createCustomerCommand);
         return Ok();
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> Get()
+    {
+        throw new NotImplementedException();
     }
 }

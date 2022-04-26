@@ -11,6 +11,8 @@ public class Customer
     public string Email { get; private set; }
     public string Password { get; private set; }
     
+    public string Role { get; set; }
+    
     private static int CLIENT_MIN_NAME_SIZE = 3;
     private static int CLIENT_MIN_SURNAME_SIZE = 3;
     private static int CLIENT_MIN_EMAIL_SIZE = 10;
@@ -59,4 +61,8 @@ public class Customer
         }
     }
 
+    public void SetRoles(string customerRoles)
+    {
+        Role = customerRoles;
+    }
 }
