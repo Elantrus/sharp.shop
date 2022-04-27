@@ -1,13 +1,13 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Shouldly;
 using Tests.Utilities;
+using WebApi.Features.Authentication.Application;
 using WebApi.Features.Customers.Application;
 using Xunit;
 
-namespace Tests.Integration.Features.Product;
+namespace Tests.Integration.Features.Customer;
 
 public class TestCreateCustomer
 {
@@ -23,7 +23,7 @@ public class TestCreateCustomer
     {
         var command = new CreateCustomer.Command
         {
-            Email = "test@sharp.io",
+            Email = "customershouldbecreated@sharp.io",
             Name = "Lazaro",
             SurName = "Junior Silva",
             Password = "v3r%StroNgp4ssw0rd"
@@ -39,7 +39,7 @@ public class TestCreateCustomer
     {
         var command = new CreateCustomer.Command
         {
-            Email = "test@sharp.io",
+            Email = "customerpasswordinvalid@sharp.io",
             Name = "Lazaro",
             SurName = "Junior Silva",
             Password = "notstrongPassword"
@@ -49,4 +49,7 @@ public class TestCreateCustomer
 
         response.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
     }
+    
+    
+    
 }

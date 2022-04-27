@@ -31,7 +31,7 @@ public class CreateCustomer
             if (emailExistsInCustomers) throw new EmailAlreadyExistsException();
 
             var createdCustomer = new Customer(request.Name, request.SurName, request.Email, request.Password);
-            
+
             _dbContext.Add(createdCustomer);
 
             await _dbContext.SaveChangesAsync(cancellationToken);

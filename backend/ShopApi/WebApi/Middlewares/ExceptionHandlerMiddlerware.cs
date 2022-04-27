@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net;
+using WebApi.Exceptions;
 using WebApi.Middlewares.Models;
 
 namespace WebApi.Middlewares;
@@ -28,9 +29,11 @@ public class ExceptionHandlerMiddlerware
     private void HandleException(HttpContext context, IWebHostEnvironment environment, Exception exception)
     {
         var statusCode = HttpStatusCode.InternalServerError;
-        switch (exception.GetType())
+        
+        switch (exception)
         {
-            default:
+            case RefreshAuthenticationFailedException:
+                statusCode = HttpStatusCode.Unauthorized;
                 break;
         }
 
