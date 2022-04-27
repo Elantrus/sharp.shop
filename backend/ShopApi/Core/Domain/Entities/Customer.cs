@@ -15,7 +15,8 @@ public class Customer
     public Guid RefreshToken { get; set; }
     public DateTime? LastLoginDateTime { get; set; }
     public DateTime RegistrationDateTime { get; set; }
-    
+    public Review Review { get; set; }
+    public long ReviewForeignId { get; set; }
     public string Role { get; set; }
     
     private static int CLIENT_MIN_NAME_SIZE = 3;

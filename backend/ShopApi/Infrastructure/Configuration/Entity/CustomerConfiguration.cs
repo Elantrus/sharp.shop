@@ -13,5 +13,8 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.HasKey(customer => customer.Id);
         
         builder.Property(customer => customer.Id).HasValueGenerator<SequentialGuidValueGenerator>();
+        
+        builder.HasOne(customer => customer.Review)
+            .WithOne(review => review.Customer);
     }
 }
