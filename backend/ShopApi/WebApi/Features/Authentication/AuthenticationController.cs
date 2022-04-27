@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Features.Security.Application;
+using WebApi.Features.Authentication.Application;
 
-namespace WebApi.Features.Security;
+namespace WebApi.Features.Authentication;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -18,6 +18,15 @@ public class AuthenticationController : ControllerBase
     [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult> Authenticate([FromBody] CustomerAuthentication.Command command)
+    {
+        var result = await _mediator.Send(command);
+
+        return Ok(result);
+    }
+    
+    [AllowAnonymous]
+    [HttpPost("refresh")]
+    public async Task<ActionResult> Refresh([FromBody] RefreshAuthentication.Command command)
     {
         var result = await _mediator.Send(command);
 

@@ -11,6 +11,10 @@ public class Customer
     public string SurName { get; private set; }
     public string Email { get; private set; }
     public string Password { get; set; }
+    public string? DeviceId { get; set; }
+    public Guid RefreshToken { get; set; }
+    public DateTime? LastLoginDateTime { get; set; }
+    public DateTime RegistrationDateTime { get; set; }
     
     public string Role { get; set; }
     
@@ -27,9 +31,15 @@ public class Customer
         SetFullName(name, surName);
         SetEmail(email);
         SetPassword(password);
+        SetRegistrationDateTime();
         Role = nameof(Customer).ToLower();
     }
-    
+
+    private void SetRegistrationDateTime()
+    {
+        RegistrationDateTime = DateTime.Now;
+    }
+
     private void SetFullName(string name, string surName)
     {
         if (name.Length <= CLIENT_MIN_NAME_SIZE) throw new FieldLengthTooLow(nameof(Name), CLIENT_MIN_NAME_SIZE);

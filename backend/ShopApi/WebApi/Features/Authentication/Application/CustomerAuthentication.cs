@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Exceptions;
 
-namespace WebApi.Features.Security.Application;
+namespace WebApi.Features.Authentication.Application;
 
 public class CustomerAuthentication
 {
@@ -13,11 +13,13 @@ public class CustomerAuthentication
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        public string DeviceId { get; set; }
     }
 
     public class Result
     {
         public string Token { get; set; }
+        public Guid RefreshToken { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, Result>
@@ -40,7 +42,16 @@ public class CustomerAuthentication
                                  customer.Password.Equals(passwordHash), cancellationToken)
                              ?? throw new PasswordOrEmailIsInvalidException();
 
-            return new Result {Token = _tokenService.GenerateToken(customerDb)};
+            customerDb.RefreshToken = Guid.NewGuid();
+            customerDb.DeviceId = request.DeviceId;
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return new Result
+            {
+                Token = _tokenService.GenerateToken(customerDb),
+                RefreshToken = customerDb.RefreshToken
+            };
         }
     }
 }

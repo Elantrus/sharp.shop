@@ -2,6 +2,7 @@ using Core.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Extensions;
 using WebApi.Features.Customers.Application;
 
 namespace WebApi.Features.Customers;
@@ -28,7 +29,10 @@ public class CustomerController : ControllerBase
     [Authorize(Roles = "customer")]
     public async Task<ActionResult> Get()
     {
-        var result = await _mediator.Send(new GetCustomer.Command());
+        var result = await _mediator.Send(new GetCustomer.Command
+        {
+            Id = User.GetCustomerId()
+        });
 
         return Ok(result);
     }
