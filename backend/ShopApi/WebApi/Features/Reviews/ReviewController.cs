@@ -25,4 +25,12 @@ public class ReviewController : ControllerBase
         await _mediator.Send(command);
         return Ok();
     }
+    
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> Get()
+    {
+        var response = await _mediator.Send(new GetReviews.Command());
+        return Ok(response);
+    }
 }

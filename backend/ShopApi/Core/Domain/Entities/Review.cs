@@ -9,6 +9,8 @@ public class Review
     public string Description { get; set; }
     public string Title { get; set; }
     public Customer Customer { get; set; }
+    
+    public Product Product { get; set; }
 
     public Review()
     {
