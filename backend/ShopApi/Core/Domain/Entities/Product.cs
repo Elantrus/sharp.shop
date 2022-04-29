@@ -9,4 +9,5 @@ public class Product
     public double SalePrice { get; set; }
     public double ProductCost { get; set; }
     public virtual Metric Metric { get; set; }
+    public virtual List<Review> Reviews { get; set; }
 }

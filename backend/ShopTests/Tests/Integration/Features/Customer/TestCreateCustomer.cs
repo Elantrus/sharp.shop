@@ -50,6 +50,4 @@ public class TestCreateCustomer
         response.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
     }
     
-    
-    
 }
