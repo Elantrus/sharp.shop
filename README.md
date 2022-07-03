@@ -20,10 +20,10 @@ A list of technologies that you will find in this project.
 ![image](https://user-images.githubusercontent.com/57990145/165192252-d56586ab-a706-4f90-9547-3a3b2bf5c332.png)
 
 ### Frontend
-- React
+- <s>React</s> Svelte for the win
 - Typescript
 - Javascript
-- CSS
+- TailwindCSS
 - HTML
 
 ### Backend
