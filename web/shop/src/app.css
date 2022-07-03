@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    @apply dark:bg-neutral-900;
+    @apply dark:text-neutral-300;
+    @apply bg-neutral-100;
+    @apply text-neutral-900;
+
+    @apply transition-all duration-500 ease-in-out;
+    @apply font-mono;
+}
