@@ -18,15 +18,14 @@
         }
     })
     
-    
     function toggleNavbar(){
         showNavbar = !showNavbar;
     }
 
     function toggleDarkMode(){
         theme.update(current => {
-            return current === 'dark' ? 'light' : 'dark';
-        }
+                return current === 'dark' ? 'light' : 'dark';
+            }
         );
     }
 </script>
