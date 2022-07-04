@@ -7,11 +7,21 @@
     //Stores
     import {theme} from '../stores/themeStore';
     import {customer} from '../stores/customerStore'
+    import {credentials} from '../stores/credentialsStore'
 
     //Toast
     import Toast from "../components/notification/toast.svelte";
     
     import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
+    import { CustomerService } from "../services/customer";
+
+    onMount(() => {
+        if($customer) return;
+
+        if($credentials)
+            CustomerService.get().then(response => {});
+    });
 
     let showNavbar = false;
 

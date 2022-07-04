@@ -1,5 +1,5 @@
 import { browser } from "$app/env";
-import type {CredentialsModel} from "../models/authentication/credentials";
+import type {AuthenticationResult} from "../models/authentication/authenticationResult";
 import { writable, get, type Updater } from "svelte/store";
 
 export const credentials = _credentials();
@@ -7,32 +7,32 @@ export const credentials = _credentials();
 
 function _credentials(){
     const token_key = 'credentials';
-    const {set, update, subscribe} = writable<CredentialsModel>();
+    const {set, update, subscribe} = writable<AuthenticationResult>();
 
     if(browser){
-        let tokenFromStorage : CredentialsModel = JSON.parse(localStorage.getItem(token_key) as string);
+        let tokenFromStorage : AuthenticationResult = JSON.parse(localStorage.getItem(token_key) as string);
 
         set(tokenFromStorage);
     }
 
     return {
-        set: (newCustomer : CredentialsModel) => {
+        set: (newCustomer : AuthenticationResult) => {
             if(!browser) return;
 
             localStorage.setItem(token_key, JSON.stringify(newCustomer));
 
             set(newCustomer);
         },
-        update: ( customerUpdater : Updater<CredentialsModel>) => {
+        update: ( customerUpdater : Updater<AuthenticationResult>) => {
             if(!browser) return;
 
-            let updatedCustomer = customerUpdater.call(null, get(credentials) as CredentialsModel);
+            let updatedCustomer = customerUpdater.call(null, get(credentials) as AuthenticationResult);
 
             localStorage.setItem(token_key, JSON.stringify(updatedCustomer));
 
             update(customerUpdater);
         },
         subscribe,
-        get: get
+        get: () => get(credentials)
     };
 }
