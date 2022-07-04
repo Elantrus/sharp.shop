@@ -10,4 +10,7 @@ body{
 
     @apply transition-all duration-100 ease-in-out;
     @apply font-mono;
+
+    @apply flex min-h-screen w-screen;
+
 }

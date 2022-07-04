@@ -1,4 +1,4 @@
-export interface TokenModel{
+export interface CredentialsModel{
     token: string,
     refreshToken: string
 }

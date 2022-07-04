@@ -6,7 +6,22 @@ export const theme = _theme();
 
 
 function _theme(){
-    const {set, update, subscribe} = writable<string | null>(browser ? localStorage.getItem('dark_theme') : 'light');
+    function updateTheme(selectedTheme : string){
+        if(!browser) return;
+
+        if(selectedTheme === 'dark'){
+            document.documentElement.classList.add('dark');
+        }
+        else{
+            document.documentElement.classList.remove('dark');
+        }
+    }
+
+    const selectedTheme  = (browser ? localStorage.getItem('dark_theme') : 'light');
+
+    updateTheme(selectedTheme as string);
+
+    const {set, update, subscribe} = writable(selectedTheme);
 
     return {
         set: (newOption: string) => {
@@ -23,6 +38,8 @@ function _theme(){
             let selectedOption = newOption.call(null, get(theme) as string);
 
             localStorage.setItem('dark_theme',  selectedOption as string);
+
+            updateTheme(selectedOption as string);
 
             update(newOption);
         },
