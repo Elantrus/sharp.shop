@@ -32,7 +32,7 @@
             goto('/customer');
         }
         else{
-            goto('/auth/login');
+            goto('/customer/login');
         }
     }
 
@@ -84,7 +84,7 @@
     </header>
 </template>
 
-<main class="px-10 py-16 mx-auto md:w-10/12 2xl:w-5/12 h-full w-full">
+<main class="px-10 py-16 mx-auto md:w-10/12 2xl:w-5/12 h-full w-full  flex flex-col">
     <slot />
 </main>
 
