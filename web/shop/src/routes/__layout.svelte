@@ -3,7 +3,12 @@
     import Icon from '@iconify/svelte';
     import {slide} from 'svelte/transition'
     import { browser } from "$app/env";
+
+    //Stores
     import {theme} from '../stores/themeStore';
+    import {customer} from '../stores/customerStore'
+
+import { goto } from "$app/navigation";
 
     let showNavbar = false;
 
@@ -28,6 +33,14 @@
             }
         );
     }
+
+    function customerPage(){
+        if(!$customer){
+            goto('/login');
+        }
+
+        goto('/customer');
+    }
 </script>
 
 <template>
@@ -37,17 +50,24 @@
         </div>
         <div>
             <nav class="flex flex-col justify-between items-end">
-                <button class="md:hidden" on:click={toggleNavbar}>
-                    <Icon icon="dashicons:menu-alt3" />
-                </button>
-                <button class="md:hidden" >
-                    <Icon icon="carbon:light-filled" />
-                </button>
+
+                <div>
+                    <button class="md:hidden" on:click={toggleNavbar}>
+                        <Icon icon="dashicons:menu-alt3" />
+                    </button>
+                    <button class="md:hidden" on:click={toggleDarkMode}>
+                        <Icon icon="carbon:light-filled" />
+                    </button>
+                    <button class="md:hidden" on:click={customerPage}>
+                        <Icon icon="bxs:user" />
+                    </button>
+                </div>
+                
                 {#if showNavbar}
                     <ul class="md:hidden" transition:slide>
-                        <li class=" dark:hover:bg-neutral-800 hover:bg-neutral-200 rounded cursor-pointer"><a class="block w-full h-full py-1 px-2" href="/">Home</a></li>
-                        <li class=" dark:hover:bg-neutral-800 hover:bg-neutral-200 rounded cursor-pointer"><a class="block w-full h-full py-1 px-2" href="/contact">Contact</a></li>
-                        <li class=" dark:hover:bg-neutral-800 hover:bg-neutral-200 rounded cursor-pointer"><a class="block w-full h-full py-1 px-2" href="/tracking">Tracking</a></li>
+                        <li class=" hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded hover:cursor-pointer"><a class="block w-full h-full py-1 px-2" href="/">Home</a></li>
+                        <li class=" hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded hover:cursor-pointer"><a class="block w-full h-full py-1 px-2" href="/contact">Contact</a></li>
+                        <li class=" hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded hover:cursor-pointer"><a class="block w-full h-full py-1 px-2" href="/tracking">Tracking</a></li>
                     </ul>
                 {/if}
                 
