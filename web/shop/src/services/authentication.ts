@@ -1,4 +1,4 @@
-import type { LoginModel } from "src/models/authentication/login";
+import type { LoginModel } from "src/models/customer/login";
 import apiClient from "./api";
 
 export class AuthenticationService{
