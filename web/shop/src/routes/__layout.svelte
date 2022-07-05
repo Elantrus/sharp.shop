@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import Icon from '@iconify/svelte';
-	import { slide } from 'svelte/transition';
 	import { browser } from '$app/env';
 
 	//Stores
@@ -15,6 +14,8 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { CustomerService } from '../services/customer';
+
+    import {slide} from 'svelte/transition'
 
 	let lowScreenSize = false;
 	let showNavbar = false;
@@ -92,7 +93,7 @@
 						</div>
 					</div>
 					{#if showNavbar || !lowScreenSize}
-						<ul class="flex justify-end flex-col md:flex-row text-end">
+						<ul transition:slide class="flex justify-end flex-col md:flex-row text-end">
 							<li
 								class="rounded hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:cursor-pointer"
 							>
