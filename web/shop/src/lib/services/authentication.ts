@@ -1,4 +1,4 @@
-import type { CustomerAuthentication } from "../models/customer/customerAuthentication";
+import type { CustomerAuthentication } from "$lib/models/customer/customerAuthentication";
 import apiClient from "./api";
 
 export class AuthenticationService{

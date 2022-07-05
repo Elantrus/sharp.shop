@@ -1,19 +1,19 @@
 <script lang="ts">
 	import '../app.css';
 	import Icon from '@iconify/svelte';
-	import { browser } from '$app/env';
 
 	//Stores
-	import { theme } from '../stores/themeStore';
-	import { customer } from '../stores/customerStore';
-	import { credentials } from '../stores/credentialsStore';
+	import { customer } from '$lib/stores/customerStore';
+	import { credentials } from '$lib/stores/credentialsStore';
+
+	import { theme } from '$lib/stores/themeStore';
 
 	//Toast
-	import Toast from '../components/notification/toast.svelte';
+	import Toast from '$lib/components/notification/toast.svelte';
 
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { CustomerService } from '../services/customer';
+	import { CustomerService } from '$lib/services/customer';
 
     import {slide} from 'svelte/transition'
 
@@ -88,11 +88,14 @@
 						>
 							<Icon icon="carbon:light-filled" />
 						</div>
-						<div on:click={toggleNavbar} class="text-2xl hover:cursor-pointer">
-							<Icon icon="dashicons:menu-alt" />
-						</div>
+
+						{#if lowScreenSize}
+							<div on:click={toggleNavbar} class="text-2xl hover:cursor-pointer">
+								<Icon icon="dashicons:menu-alt" />
+							</div>
+						{/if}
 					</div>
-					{#if showNavbar || !lowScreenSize}
+					{#if !lowScreenSize || (lowScreenSize && showNavbar)}
 						<ul transition:slide class="flex justify-end flex-col md:flex-row text-end">
 							<li
 								class="rounded hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:cursor-pointer"
@@ -119,7 +122,7 @@
 	</header>
 </template>
 
-<main class="px-10 py-16 mx-auto md:w-10/12 2xl:w-5/12 h-full w-full  flex flex-col">
+<main class="px-10 py-6 mx-auto md:w-10/12 2xl:w-5/12 h-full w-full  flex flex-col">
 	<slot />
 </main>
 

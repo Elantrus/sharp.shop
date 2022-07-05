@@ -1,5 +1,4 @@
 import { get, writable, derived } from "svelte/store"
-import type {Updater} from "svelte/store"
 
 const TIMEOUT = 3000
 

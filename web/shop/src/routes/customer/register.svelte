@@ -1,84 +1,112 @@
 <script lang="ts">
-    import Input from '../../components/ui/forms/input.svelte'
-    import {CustomerService} from '../../services/customer'
-    import {notifications} from '../../stores/notificationStore';
-    import { AuthenticationService } from '../../services/authentication';
-    import { credentials } from '../../stores/credentialsStore';
+	import Input from '$lib/components/ui/forms/input.svelte';
+	import { CustomerService } from '$lib/services/customer';
+	import { notifications } from '$lib/stores/notificationStore';
+	import { AuthenticationService } from '$lib/services/authentication';
+	import { credentials } from '$lib/stores/credentialsStore';
+	import { fade } from 'svelte/transition';
 
-    //Models
-    import type { CreateCustomer} from '../../models/customer/createCustomer'
-    import type {AuthenticationResult} from '../../models/authentication/authenticationResult'
-    import type {CustomerAuthentication} from '../../models/customer/customerAuthentication'
-    
-    import {page} from "$app/stores";
-    import { goto } from '$app/navigation';
-    import {visitor} from '../../stores/visitorStore'
+	//Models
+	import type { CreateCustomer } from '$lib/models/customer/createCustomer';
+	import type { AuthenticationResult } from '$lib/models/authentication/authenticationResult';
+	import type { CustomerAuthentication } from '$lib/models/customer/customerAuthentication';
 
-    export let query : URLSearchParams = $page.url.searchParams;
-    
-    let createCustomerModel : CreateCustomer = {
-       email : '',
-       name: '',
-       surName: '',
-       password: ''
-    };
+	//Validators
+	import {
+		emailValidator,
+		requiredValidator,
+		passwordValidator
+	} from '$lib/validators/validationHandlers';
 
-    let formValidation : any = {
-        "email": {
-            field: createCustomerModel.email,
-            valid: false
-        },
-        "name": {
-            field: createCustomerModel.name,
-            valid: false
-        },
-        "surName": {
-            field: createCustomerModel.name,
-            valid: false
-        },
-        "password": {
-            field: createCustomerModel.name,
-            valid: false
-        }
-    };
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { visitor } from '$lib/stores/visitorStore';
+	import Form from '$lib/components/ui/forms/form.svelte';
+	import Icon from '@iconify/svelte';
 
-    async function register(){
-        CustomerService.create(createCustomerModel).then(response => {
-            const loginCredentials : CustomerAuthentication = {
-                email: createCustomerModel.email,
-                password: createCustomerModel.password,
-                deviceId: $visitor
-            };
+	export let query: URLSearchParams = $page.url.searchParams;
 
-            AuthenticationService.login(loginCredentials).then(authResponse => {
-                const data : AuthenticationResult = authResponse.data;
-                credentials.set(data);
+	let submitting = false;
 
-                let callBack = query.get("callback");
+	let createCustomerModel: CreateCustomer = {
+		email: '',
+		name: '',
+		surName: '',
+		password: ''
+	};
 
-                goto(callBack ? callBack : "/");
-            }).catch(error => notifications.danger(error, 300))
+	async function registerHandler() {
+		CustomerService.create(createCustomerModel)
+			.then((response) => {
+				const loginCredentials: CustomerAuthentication = {
+					email: createCustomerModel.email,
+					password: createCustomerModel.password,
+					deviceId: $visitor
+				};
 
-        }).catch(error => notifications.danger(error, 3000));
-    }
- 
+				AuthenticationService.login(loginCredentials)
+					.then((authResponse) => {
+						const data: AuthenticationResult = authResponse.data;
+						credentials.set(data);
+
+						let callBack = query.get('callback');
+
+						goto(callBack ? callBack : '/');
+					})
+					.catch((error) => notifications.danger(error, 300));
+			})
+			.catch((error) => notifications.danger(error, 3000));
+	}
 </script>
 
-<div class="flex flex-col gap-10 items-center min-h-full md:w-96 self-center">
-    <div class="flex flex-col items-center">
-        <h1 class="font-semibold text-xl">Creating a new account</h1>
-        <p class="text-sm text-neutral-500 text-center">Provide some informations to create your new account. Already have an account? <a class="underline" href="/auth/register">Proceed to login</a></p>
-    </div>
-    <form on:submit|preventDefault={register} class="flex flex-col gap-2 w-full">
-        
-        <Input bind:value={createCustomerModel.name} type="text" bind:isValid={formValidation["name"].valid}>Name</Input>
+<div in:fade={{duration:150}} out:fade={{duration:150}} class="flex flex-col gap-10 items-center min-h-full md:w-96 self-center">
+	<div class="flex flex-col items-center">
+		<h1 class="font-semibold text-xl">Creating a new account</h1>
+		<p class="text-sm text-neutral-500 text-center">
+			Provide some informations to create your new account. Already have an account? <a
+				class="underline"
+				href="/customer/login">Proceed to login</a
+			>
+		</p>
+	</div>
+	<Form submitHandler={registerHandler}>
+		<Input
+			bind:value={createCustomerModel.name}
+			validators={[requiredValidator]}
+			name="name"
+			type="text">Name</Input
+		>
 
-        <Input bind:value={createCustomerModel.surName} type="text" bind:isValid={formValidation["surName"].valid}>Surname</Input>
+		<Input
+			bind:value={createCustomerModel.surName}
+			validators={[requiredValidator]}
+			name="surName"
+			type="text">Surname</Input
+		>
 
-        <Input bind:value={createCustomerModel.email} type="email" bind:isValid={formValidation["email"].valid}>E-mail</Input>
+		<Input
+			bind:value={createCustomerModel.email}
+			validators={[emailValidator]}
+			name="email"
+			type="email">E-mail</Input
+		>
 
-        <Input bind:value={createCustomerModel.password} type="password" bind:isValid={formValidation["password"].valid}>Password</Input>
+		<Input
+			bind:value={createCustomerModel.password}
+			validators={[requiredValidator]}
+			name="password"
+			type="password">Password</Input
+		>
 
-        <button class="self-end rounded py-2 px-4 bg-neutral-800 text-neutral-100" type="submit"> Register </button>
-    </form>
+		<button
+			disabled={submitting}
+			class="flex items-center gap-2 self-end rounded py-2 px-4 bg-neutral-800 disabled:bg-neutral-600 text-neutral-100 hover:disabled:cursor-not-allowed"
+			type="submit"
+		>
+			{#if submitting}
+				<Icon icon="lucide:loader" class="animate-spin" />
+			{/if}
+			Register
+		</button>
+	</Form>
 </div>

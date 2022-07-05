@@ -1,5 +1,5 @@
 import { browser } from "$app/env";
-import type {AuthenticationResult} from "../models/authentication/authenticationResult";
+import type {AuthenticationResult} from "$lib/models/authentication/authenticationResult";
 import { writable, get, type Updater } from "svelte/store";
 
 export const credentials = _credentials();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { credentials } from "../stores/credentialsStore";
+import { credentials } from "$lib/stores/credentialsStore";
 
 const apiClient = axios.create({
     baseURL: 'http://localhost:5260/api'
