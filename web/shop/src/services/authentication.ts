@@ -1,8 +1,8 @@
-import type { LoginModel } from "src/models/customer/login";
+import type { CustomerAuthentication } from "../models/customer/customerAuthentication";
 import apiClient from "./api";
 
 export class AuthenticationService{
-    static async login(credentials : LoginModel){
+    static async login(credentials : CustomerAuthentication){
         return apiClient.post('/authentication', credentials);
     }
 }

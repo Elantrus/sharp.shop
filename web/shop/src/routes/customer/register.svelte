@@ -6,9 +6,9 @@
     import { credentials } from '../../stores/credentialsStore';
 
     //Models
-    import type { CreateCustomer} from '../../models/customer/register'
-    import type {AuthenticationResult} from '../../models/authentication/credentials'
-    import type {CustomerAuthentication} from '../../models/customer/login'
+    import type { CreateCustomer} from '../../models/customer/createCustomer'
+    import type {AuthenticationResult} from '../../models/authentication/authenticationResult'
+    import type {CustomerAuthentication} from '../../models/customer/customerAuthentication'
     
     import {page} from "$app/stores";
     import { goto } from '$app/navigation';

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from '$app/stores'
     
-    import type { CustomerAuthentication } from "../../models/customer/login";
+    import type { CustomerAuthentication } from "../../models/customer/customerAuthentication";
     import { AuthenticationService } from "../../services/authentication";
     import { onMount } from "svelte";
 
@@ -9,7 +9,7 @@
     import { visitor } from "../../stores/visitorStore";
     import {notifications } from "../../stores/notificationStore"
     import {credentials} from "../../stores/credentialsStore"
-    import type { AuthenticationResult } from "../../models/authentication/credentials";
+    import type { AuthenticationResult } from "../../models/authentication/authenticationResult";
 
     import Input from "../../components/ui/forms/input.svelte";
     import { goto } from "$app/navigation";
