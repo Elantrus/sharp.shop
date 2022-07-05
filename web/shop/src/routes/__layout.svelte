@@ -15,12 +15,15 @@
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
     import { CustomerService } from "../services/customer";
+    import { notifications } from "../stores/notificationStore";
 
     onMount(() => {
         if($customer) return;
 
         if($credentials)
-            CustomerService.get().then(response => {});
+            CustomerService.get().then(response => {
+                customer.set(response.data);
+            }).catch(error => notifications.danger(error, 3000));
     });
 
     let showNavbar = false;
@@ -39,7 +42,7 @@
 
     function customerPage(){
         if($customer){
-            goto('/customer');
+            goto('/dashboard');
         }
         else{
             goto('/customer/login');

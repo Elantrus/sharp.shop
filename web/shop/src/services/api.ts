@@ -16,8 +16,9 @@ apiClient.interceptors.response.use(response =>
 
 apiClient.interceptors.request.use(config => 
   {
-    if(config.headers)
-      config.headers["Authorization"] = `Bearer ${credentials.get()}`;
+    let storedCredentials = credentials.get();
+    if(config.headers && storedCredentials?.token)
+      config.headers["Authorization"] = `Bearer ${storedCredentials.token}`;
     
     return config;
   },
