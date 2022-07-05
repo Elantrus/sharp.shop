@@ -1,4 +1,4 @@
-import type { CreateCustomer } from "../models/customer/createCustomer";
+import type { CreateCustomer } from "$lib/models/customer/createCustomer";
 import apiClient from "./api";
 
 export class CustomerService{

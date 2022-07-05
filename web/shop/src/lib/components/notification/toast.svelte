@@ -1,8 +1,7 @@
 <script lang="ts">
     import { flip } from "svelte/animate";
-import { get } from "svelte/store";
     import { fly } from "svelte/transition";
-    import { notifications } from "../../stores/notificationStore";
+    import { notifications } from "$lib/stores/notificationStore";
 
     export let themes : any = {
         danger: "bg-red-500",

@@ -1,6 +1,5 @@
 
 import { browser } from "$app/env";
-import type {CredentialsModel} from "../models/authentication/authenticationResult";
 import { writable, get, type Updater } from "svelte/store";
 
 export const visitor = _visitor();
