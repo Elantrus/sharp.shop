@@ -14,12 +14,10 @@ const config = {
 	kit: {
 	adapter:
 	    adapter({
-            	pages: 'build',
+		pages: 'build',
 		assets: 'build',
-		fallback: '404.html',
-		precompress: false,
-		spec: '.do/spec.yaml',
-		name: ''
+		fallback: null,
+		precompress: false
 	    })
 	}
 };
