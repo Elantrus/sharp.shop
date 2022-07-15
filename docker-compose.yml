@@ -1,0 +1,10 @@
+version: '3.4'
+services:
+  app:
+    image: ${DOCKER_REGISTRY-}sharpfront
+    build:
+      context: .
+      dockerfile: web/shop/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 80:3000

@@ -6,7 +6,7 @@ using WebApi.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -17,6 +17,14 @@ builder.Services.AddDatabase(builder.Environment);
 
 var app = builder.Build();
 
+app.UseCors(options => {
+                         options
+			    .AllowCredentials()
+			    .AllowAnyMethod()
+			    .AllowAnyHeader()
+			    .SetIsOriginAllowed(origin => true);
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -24,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

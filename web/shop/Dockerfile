@@ -1,7 +1,7 @@
 FROM node:latest
 WORKDIR /app
 
-COPY . .
+COPY ./web/shop .
 
 RUN npm install
 RUN npm run build
