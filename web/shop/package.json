@@ -14,12 +14,7 @@
 	},
 	"devDependencies": {
 		"@iconify/svelte": "^2.2.1",
-		"@sveltejs/adapter-auto": "next",
-<<<<<<< HEAD
-		"@sveltejs/adapter-static": "^1.0.0-next.36",
-=======
 		"@sveltejs/adapter-node": "^1.0.0-next.81",
->>>>>>> 937acae (add adpter node)
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
