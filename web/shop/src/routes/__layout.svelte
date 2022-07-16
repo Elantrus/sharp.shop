@@ -59,7 +59,7 @@
 </script>
 
 <template>
-	<header class="flex justify-between md:items-center py-6 px-10 md:w-10/12 2xl:w-5/12 w-full">
+	<header class="flex justify-between md:items-center py-6 px-10 md:w-10/12 2xl:w-8/12 w-full">
 		<div>
 			<img src="/images/logo.png" alt="logo" />
 		</div>
@@ -122,14 +122,52 @@
 	</header>
 </template>
 
-<main class="px-10 py-6 mx-auto md:w-10/12 2xl:w-5/12 h-full w-full  flex flex-col">
+<main class="px-10 py-6 mx-auto md:w-10/12 2xl:w-8/12 h-screen w-full flex flex-col">
 	<slot />
 </main>
 
-<footer class="py-20 px-6 text-center text-sm">
-	<p>
-		Made with <span class="text-red-600">♥</span> by <strong>lazaro@sharpmeta.xyz</strong>
-	</p>
+<footer class="py-5 px-6 text-sm h-32 md:h-64 w-full bg-neutral-800 flex justify-center text-neutral-200">
+	<div class="w-2/3 h-full flex flex-col justify-between">
+		<div class="flex justify-around">
+			<div>
+				<h1 class="text-lg">Sharpmeta @ 2022</h1>
+				<div class="mt-2 text-neutral-200">
+					<p>409 Groove Street, Apartment#20</p>
+					<p> New York - United States</p>
+				</div>
+			</div>
+			<div>
+				<h5 class="text-lg">Contact us</h5>
+				<div class="text-neutral-200 mt-2">
+					<h5>+(00) 999-9999</h5>
+					<button class="bg-white rounded text-neutral-800 p-1 mt-4 w-full">Chat now</button> 
+				</div>
+			</div>
+			<div>
+				<h5 class="text-lg">Follow us</h5>
+				<div class="text-neutral-200">
+					<div class="mt-2 flex gap-2">
+						<Icon class="text-2xl" icon="ion:logo-twitter" />
+						<span>Twitter</span>
+					</div>
+					<div class="mt-2 flex gap-2">
+						<Icon class="text-2xl" icon="ion:logo-instagram" />
+						<span>Instagram</span>
+					</div>
+					<div class="mt-2 flex gap-2">
+						<Icon class="text-2xl" icon="ion:logo-tiktok" />
+						<span>Tiktok</span>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<hr class="border-b-violet-500 border-solid border-y-neutral-700" />
+		<p class="text-white p-4 text-center">
+			Made with <span class="text-red-600">♥</span> by <strong>lazaro@sharpmeta.xyz</strong>
+		</p>
+	</div>
+	
 </footer>
 
 <Toast />
