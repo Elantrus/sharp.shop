@@ -1,9 +1,15 @@
-FROM node:latest
+FROM node:latest AS publish
 WORKDIR /app
 
-COPY ./web/shop .
+COPY ./web/shop/package.json ./web/shop/package-lock.json ./
+RUN npm ci
 
-RUN npm install
+COPY ./web/shop .
 RUN npm run build
 
-CMD ["npm", "run", "preview"]
+
+
+FROM node:latest as final
+COPY --from=publish /app/package.json /app/publish .
+
+CMD ["node", "index.js"]
