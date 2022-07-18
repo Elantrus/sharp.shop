@@ -10,6 +10,6 @@ RUN npm run build
 
 
 FROM node:latest as final
-COPY --from=publish /app/package.json /app/publish .
+COPY --from=publish /app/package.json /app/publish ./
 
 CMD ["node", "index.js"]
