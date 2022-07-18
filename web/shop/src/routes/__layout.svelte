@@ -60,8 +60,9 @@
 
 <template>
 	<header class="flex justify-between md:items-center py-6 px-10 md:w-10/12 2xl:w-8/12 w-full">
-		<div>
-			<img src="/images/logo.png" alt="logo" />
+		<div class="flex flex-col md:flex-row items-center md:gap-4">
+			<img src="/images/logo.png" height="50" width="50" alt="logo" />
+			<h1 class="text-lg"> <span class="font-bold">ANYA</span>.Store</h1>
 		</div>
 		<div>
 			<nav class="flex flex-col justify-between items-end">
@@ -122,13 +123,13 @@
 	</header>
 </template>
 
-<main class="px-10 py-6 mx-auto md:w-10/12 2xl:w-8/12 h-screen w-full flex flex-col">
+<main class="px-10 py-6 mx-auto md:w-10/12 2xl:w-8/12 min-h-screen w-full flex flex-col">
 	<slot />
 </main>
 
-<footer class="py-5 px-6 text-sm h-32 md:h-64 w-full bg-neutral-800 flex justify-center text-neutral-200">
-	<div class="w-2/3 h-full flex flex-col justify-between">
-		<div class="flex justify-around">
+<footer class="py-5 px-6 text-sm min-h-32 md:min-h-64 w-full bg-neutral-800 flex justify-center text-neutral-200">
+	<div class="w-2/3 h-full flex flex-col justify-between gap-5">
+		<div class="flex flex-col md:flex-row justify-center md:justify-around gap-10">
 			<div>
 				<h1 class="text-lg">Sharpmeta @ 2022</h1>
 				<div class="mt-2 text-neutral-200">
