@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {slide} from 'svelte/transition'
 	export let type: string;
 	export let value: any;
     export let name: string;
@@ -37,6 +38,6 @@
 	</span>
     
 	{#if !$results.valid}
-		<span class="text-xs self-end text-red-500">{$results.message}</span>
+		<span transition:slide class="text-xs self-end text-red-500">{$results.message}</span>
 	{/if}
 </div>
