@@ -1,9 +1,10 @@
 <script lang="ts">
 	import {slide} from 'svelte/transition'
-	export let type: string;
 	export let value: any;
     export let name: string;
     export let validators: Function[] = [];
+    export let maxlength: number;
+    export let rows: number;
 
 	import Icon from '@iconify/svelte';
 	import { inputValidator } from '$lib/validators/validator';
@@ -23,19 +24,15 @@
 
 <div class="flex flex-col gap-1">
 	<label class="text-xs" for={name}> <slot /> </label>
-	<input
-		{type}
+	<textarea
 		{name}
         use:handler
+        maxlength={maxlength}
+        rows={rows}
         value={value}
 		on:change={handleChange}
-		class={`${
-			icons[type] ? 'pl-9' : ''
-		} shadow text-neutral-700 text-sm py-2 px-2 rounded border-none focus:outline-none focus:outline-neutral-600" name="email`}
+		class={`shadow text-neutral-700 text-sm py-2 px-2 rounded border-none focus:outline-none focus:outline-neutral-600" name="email`}
 	/>
-	<span class="relative pl-2 -top-8 h-px text-xl text-neutral-700 w-0">
-		<Icon icon={`${icons[type]}`} />
-	</span>
     
 	{#if !$results.valid}
 		<span transition:slide class="text-xs self-end text-red-500">{$results.message}</span>

@@ -1,6 +1,20 @@
 <script lang="ts">
 	import Reviewcard from '$lib/components/ui/reviewcard.svelte';
+	import type { IGetReviewResult } from '$lib/models/reviews/getReview';
+	import { reviewService } from '$lib/services/review';
 	import Icon from '@iconify/svelte';
+	import { onMount } from 'svelte';
+	import { customer } from '$lib/stores/customerStore';
+	import Reviewform from '$lib/components/ui/reviewform.svelte';
+	import type { IGetLatestProductResult } from '$lib/models/products/getLatestProduct';
+	import { productService } from '$lib/services/product';
+
+	let reviews: IGetReviewResult[] = [];
+	let latestProduct: IGetLatestProductResult;
+	onMount(() => {
+		reviewService.getReviews().then((response) => (reviews = response.data));
+		productService.getLatestProduct().then((response) => (latestProduct = response.data));
+	});
 </script>
 
 <div>
@@ -74,19 +88,31 @@
 			</div>
 		</div>
 	</div>
-	<div class="mt-10">
-		<div class="mb-10 flex flex-col justify-center items-center gap-1">
+	<div class="mt-10 flex flex-col items-center justify-center">
+		<div class="mb-10 flex flex-col justify-center items-center gap-1 " >
 			<h1 class="text-lg">Reviews</h1>
 			<div class="rounded dark:p-2 dark:bg-neutral-800 inline">
 				<span class="font-bold">5.0</span> ⭐⭐⭐⭐⭐
 			</div>
 			<p class="text-sm text-neutral-400">According to 129 customers.</p>
 		</div>
-		<Reviewcard />
-		<Reviewcard />
-		<Reviewcard />
-		<Reviewcard />
-		<Reviewcard />
+		{#if $customer && latestProduct}
+			<div class="w-full md:w-96">
+				<h1 class="text">Write a review</h1>
+				<div class="border-2 dark:border-neutral-700 p-4 rounded">
+					<Reviewform productId={latestProduct.id} />
+				</div>
+			</div>
+		{/if}
+
+		{#each reviews as review}
+			<Reviewcard
+				description={review.description}
+				score={review.score}
+				title={review.title}
+				username={review.customerName}
+			/>
+		{/each}
 	</div>
 </div>
 
