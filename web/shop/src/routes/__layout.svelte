@@ -60,7 +60,7 @@
 
 <template>
 	<header class="flex justify-between md:items-center py-6 px-10 md:w-10/12 2xl:w-8/12 w-full">
-		<div class="flex flex-col md:flex-row items-center md:gap-4">
+		<div class="flex flex-col md:flex-row items-center md:gap-4 hover:cursor-pointer">
 			<img src="/images/logo.png" height="50" width="50" alt="logo" />
 			<h1 class="text-lg"> <span class="font-bold">ANYA</span>.Store</h1>
 		</div>
