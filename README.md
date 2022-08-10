@@ -6,13 +6,7 @@ This project is a website which is intended to sell a single product, but not li
 
 [Sharp.Shop](https://shopdemo.sharpmeta.xyz/)
 
-## Approach
-I'm trying to approach the most recent and elegant ways to project a web application, with that in mind, the following terms were very common during this work:
-
-- Kanban
-![board](https://github.com/DrokeRavens/sharp.shop/blob/master/images/board.png)
-
-- Agile
+## Pratices
 - Vertical Slices Architecture
 - Clean Code
 
